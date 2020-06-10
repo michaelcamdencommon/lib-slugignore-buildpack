@@ -15,5 +15,5 @@ SLUGIGNORE="$(cat "${ENV_DIR}/SLUGIGNORE")"
 
 while IFS= read -r line
 do
-  ( echo "Removing $line" | indent && rm -rf "$line" && echo "Done" )
-done < "$SLUGIGNORE"
+  ( echo "Removing $line" | indent && rm -rf "${BUILD_DIR}/$line" && echo "Done" )
+done < "${BUILD_DIR}/$SLUGIGNORE"
