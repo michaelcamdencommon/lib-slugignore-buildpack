@@ -9,7 +9,7 @@ ENV_DIR="$3"
 
 if [ ! -f "${ENV_DIR}/SLUGIGNORE" ]; then
     echo "SLUGIGNORE was not set. Aborting" | indent
-    exit 1
+    exit 0
 fi
 SLUGIGNORE="$(cat "${ENV_DIR}/SLUGIGNORE")"
 
