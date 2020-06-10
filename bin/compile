@@ -13,7 +13,9 @@ if [ ! -f "${ENV_DIR}/SLUGIGNORE" ]; then
 fi
 SLUGIGNORE="$(cat "${ENV_DIR}/SLUGIGNORE")"
 
+echo "Ignore file: ${BUILD_DIR}/$SLUGIGNORE"
+
 while IFS= read -r line
 do
-  ( echo "Removing $line" | indent && rm -rf "${BUILD_DIR}/$line" && echo "Done" )
-done < "${BUILD_DIR}/$SLUGIGNORE"
+  ( echo "Removing ${BUILD_DIR}/$line" && rm -rf "${BUILD_DIR}/$line" && echo "Done" )
+done <<< $(cat "${BUILD_DIR}/$SLUGIGNORE")
