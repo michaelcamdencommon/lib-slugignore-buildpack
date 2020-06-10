@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+indent() {
+    sed -u 's/^/      /'
+}
+
+BUILD_DIR="$1"
+CACHE_DIR="$2"
+ENV_DIR="$3"
+
+if [ ! -f "${ENV_DIR}/SLUGIGNORE" ]; then
+    echo "SLUGIGNORE was not set. Aborting" | indent
+    exit 1
+fi
+SLUGIGNORE="$(cat "${ENV_DIR}/SLUGIGNORE")"
+
+while IFS= read -r line
+do
+  ( echo "Removing $line" | indent && rm -rf "$line" && echo "Done" )
+done < "$SLUGIGNORE"
