@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
-indent() {
-    sed -u 's/^/      /'
-}
-
 BUILD_DIR="$1"
 CACHE_DIR="$2"
 ENV_DIR="$3"
 
 if [ ! -f "${ENV_DIR}/SLUGIGNORE" ]; then
-    echo "SLUGIGNORE was not set. Aborting" | indent
-    exit 0
+  echo "SLUGIGNORE was not set. Aborting"
+  exit 0
 fi
 SLUGIGNORE="$(cat "${ENV_DIR}/SLUGIGNORE")"
+
+if [ ! -f "${BUILD_DIR}/$SLUGIGNORE" ]; then
+	echo "${BUILD_DIR}/$SLUGIGNORE not found. Aborting"
+	exit 0
+fi
 
 echo "Ignore file: ${BUILD_DIR}/$SLUGIGNORE"
 
